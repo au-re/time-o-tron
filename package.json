@@ -7,6 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "commit": "git-cz"
   },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
   "author": "Aurélien Franky",
   "license": "MIT",
   "dependencies": {
