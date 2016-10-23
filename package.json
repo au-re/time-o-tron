@@ -1,0 +1,26 @@
+{
+  "name": "time-o-tron",
+  "version": "1.0.0",
+  "description": "What time is it in ...  ? Ask Time-o-Tron! A simple chatbot demo using Microsoft's Bot Framework",
+  "scripts": {
+    "start": "node bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "git-cz"
+  },
+  "author": "Aurélien Franky",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "commitizen": "^2.8.6",
+    "cz-conventional-changelog": "^1.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/au-re/time-o-tron.git"
+  },
+  "bugs": {
+    "url": "https://github.com/au-re/time-o-tron/issues"
+  }
+}
