@@ -1,31 +1,34 @@
 {
   "name": "time-o-tron",
   "version": "1.0.0",
-  "description": "What time is it in ...  ? Ask Time-o-Tron! A simple chatbot demo using Microsoft's Bot Framework",
+  "description": "What time is it in ... ? Ask Time-o-Tron! A simple chatbot demo using Microsoft's Bot Framework",
+  "main": "app.js",
   "scripts": {
-    "start": "node bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "commit": "git-cz"
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    }
-  },
-  "author": "Aurélien Franky",
-  "license": "MIT",
-  "dependencies": {
-    "express": "^4.14.0"
-  },
-  "devDependencies": {
-    "commitizen": "^2.8.6",
-    "cz-conventional-changelog": "^1.2.0"
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/au-re/time-o-tron.git"
   },
+  "keywords": [
+    "bot",
+    "chatbot",
+    "microsoft-bot-framework"
+  ],
+  "author": "Aurélien Franky",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/au-re/time-o-tron/issues"
+  },
+  "homepage": "https://github.com/au-re/time-o-tron#readme",
+  "dependencies": {
+    "botbuilder": "^3.7.0",
+    "dotenv": "^4.0.0",
+    "express": "^4.14.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.16.1",
+    "nodemon": "^1.11.0"
   }
 }
