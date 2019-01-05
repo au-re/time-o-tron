@@ -11,6 +11,7 @@ app.listen(process.env.PORT || 1337, () => console.log("webhook is listening"));
 
 // Accepts POST requests at /webhook endpoint
 app.post("/webhook", (req, res) => {
+  console.log("POST /webhook");
 
   // Parse the request body from the POST
   let body = req.body;
@@ -42,6 +43,7 @@ app.post("/webhook", (req, res) => {
 
 // Accepts GET requests at the /webhook endpoint
 app.get("/webhook", (req, res) => {
+  console.log("GET /webhook");
 
   /** UPDATE YOUR VERIFY TOKEN **/
   const VERIFY_TOKEN = "<YOUR_VERIFY_TOKEN>";
@@ -66,4 +68,12 @@ app.get("/webhook", (req, res) => {
       res.sendStatus(403);
     }
   }
+});
+
+app.get("/about", (req, res) => {
+  console.log("GET /about");
+
+  return res.status(200).send({
+    version: "0.0.1"
+  });
 });
