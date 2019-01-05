@@ -36,11 +36,18 @@ async function callSendAPI(sender_psid, response) {
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
   let response;
-  const currenTime = moment();
+
   if (received_message.text) { // Check if the message contains text
-    response = {
-      text: `You sent the message: "${received_message.text}" current time: "${currenTime.tz("Europe/Stockholm").format("YY-MM-DD hh:mm")}"`,
-    };
+    try {
+      const currenTime = moment().tz(received_message.text).format("YY-MM-DD hh:mm");
+      response = {
+        text: `Current time in "${received_message.text}" is "${currenTime}"`,
+      };
+    } catch (error) {
+      response = {
+        text: `Cannot find time for "${received_message.text}"`,
+      };
+    }
   }
 
   // Sends the response message
@@ -77,7 +84,7 @@ app.post("/webhook", (req, res) => {
       } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
       }
-      
+
     });
 
     // Return a "200 OK" response to all events
