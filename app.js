@@ -50,7 +50,7 @@ function handleMessage(sender_psid, received_message) {
       const timeZone = getCityTimezone(received_message.text);
       if (!timeZone) throw new Error("no timezone found");
 
-      const currenTime = moment().tz(timeZone).format("YY-MM-DD hh:mm");
+      const currenTime = moment().tz(timeZone).format("dd do HH:mm");
       response = {
         text: `Current time in "${received_message.text}" is "${currenTime}"`,
       };
