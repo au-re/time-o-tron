@@ -39,7 +39,7 @@ function handleMessage(sender_psid, received_message) {
   const currenTime = moment();
   if (received_message.text) { // Check if the message contains text
     response = {
-      text: `You sent the message: "${received_message.text}" current time: "${currenTime.format("YY-MM-DD hh:mm")}"`,
+      text: `You sent the message: "${received_message.text}" current time: "${currenTime.tz("Europe/Stockholm").format("YY-MM-DD hh:mm")}"`,
     };
   }
 
@@ -58,7 +58,7 @@ app.post("/webhook", (req, res) => {
 
   // Parse the request body from the POST
   const { body } = req;
-
+  console.log("body:", body);
   // Check the webhook event is from a Page subscription
   if (body.object === "page") {
 
@@ -77,6 +77,7 @@ app.post("/webhook", (req, res) => {
       } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
       }
+      
     });
 
     // Return a "200 OK" response to all events
