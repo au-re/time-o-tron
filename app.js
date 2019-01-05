@@ -14,7 +14,7 @@ app.listen(port, () => console.log(`webhook is listening on port: ${port}`));
 function getCityTimezone(cityName) {
   const cities = data.filter((entry) => entry.names.includes(cityName));
   const res = cities[0] || {};
-  console.log(cities);
+  console.log(cities.length, res);
   return res.timezone;
 }
 
