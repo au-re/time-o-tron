@@ -1,34 +1,18 @@
 {
   "name": "time-o-tron",
-  "version": "1.0.0",
-  "description": "What time is it in ... ? Ask Time-o-Tron! A simple chatbot demo using Microsoft's Bot Framework",
+  "version": "0.0.1",
+  "description": "What time is it in ... ? Ask Time-o-Tron!",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/au-re/time-o-tron.git"
-  },
-  "keywords": [
-    "bot",
-    "chatbot",
-    "microsoft-bot-framework"
-  ],
-  "author": "Aurélien Franky",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/au-re/time-o-tron/issues"
-  },
-  "homepage": "https://github.com/au-re/time-o-tron#readme",
+  "license": "MIT",
   "dependencies": {
-    "botbuilder": "^3.7.0",
-    "dotenv": "^4.0.0",
-    "express": "^4.14.1"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "request": "^2.88.0"
   },
   "devDependencies": {
-    "eslint": "^3.16.1",
-    "nodemon": "^1.11.0"
+    "eslint": "^5.12.0"
   }
 }
