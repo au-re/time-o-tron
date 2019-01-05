@@ -9,6 +9,8 @@
       "always"
     ],
     "no-console": "off",
+    "no-unused-vars": "warn",
+    "camelcase": "off",
     "class-methods-use-this": "off",
     "consistent-return": "off",
     "function-paren-newline": "off",

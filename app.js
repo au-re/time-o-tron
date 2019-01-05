@@ -1,4 +1,4 @@
-// const request = require("superagent");
+const request = require("superagent");
 const express = require("express");
 const bodyParser = require("body-parser");
 
@@ -8,26 +8,39 @@ const app = express().use(bodyParser.json());
 // Sets server port and logs message on success
 app.listen(port, () => console.log(`webhook is listening on port: ${port}`));
 
-// async function callSendAPI(senderPsid, response) {
-//   const requestBody = {
-//     recipient: {
-//       id: senderPsid,
-//     },
-//     message: response,
-//   };
 
-//   try {
-//     await request
-//       .post("https://graph.facebook.com/v2.6/me/messages")
-//       .query({ access_token: process.env.PAGE_ACCESS_TOKEN })
-//       .send(requestBody)
-//       .set("X-API-Key", "foobar")
-//       .set("accept", "json");
-//     console.log(`Message sent: ${response} to: ${senderPsid}`);
-//   } catch (error) {
-//     console.error(`Unable to send message: ${error}`);
-//   }
-// }
+// Handles messages events
+function handleMessage(sender_psid, received_message) {
+
+}
+
+// Handles messaging_postbacks events
+function handlePostback(sender_psid, received_postback) {
+
+}
+
+// Sends response messages via the Send API
+async function callSendAPI(sender_psid, response) {
+  const request_body = {
+    recipient: {
+      id: sender_psid,
+    },
+    message: response,
+  };
+
+  try {
+    await request
+      .post("https://graph.facebook.com/v2.6/me/messages")
+      .query({ access_token: process.env.PAGE_ACCESS_TOKEN })
+      .send(request_body)
+      .set("X-API-Key", "foobar")
+      .set("accept", "json");
+    console.log(`Message sent: ${response} to: ${sender_psid}`);
+
+  } catch (error) {
+    console.error(`Unable to send message: ${error}`);
+  }
+}
 
 // Accepts POST requests at /webhook endpoint
 app.post("/webhook", (req, res) => {
@@ -41,15 +54,19 @@ app.post("/webhook", (req, res) => {
 
     // Iterate over each entry - there may be multiple if batched
     body.entry.forEach((entry) => {
-
       // Get the webhook event. entry.messaging is an array, but
       // will only ever contain one event, so we get index 0
-      const webhookEvent = entry.messaging[0];
-      console.log(webhookEvent);
+      const webhook_event = entry.messaging[0];
+      const sender_psid = webhook_event.sender.id;
+      console.log(webhook_event);
 
-      // Get the sender PSID
-      // let sender_psid = webhook_event.sender.id;
-      // console.log("Sender PSID: " + sender_psid);
+      // Check if the event is a message or postback and
+      // pass the event to the appropriate handler function
+      if (webhook_event.message) {
+        handleMessage(sender_psid, webhook_event.message);
+      } else if (webhook_event.postback) {
+        handlePostback(sender_psid, webhook_event.postback);
+      }
     });
 
     // Return a "200 OK" response to all events
