@@ -28,8 +28,8 @@ app.post("/webhook", (req, res) => {
       console.log(webhook_event);
 
       // Get the sender PSID
-      let sender_psid = webhook_event.sender.id;
-      console.log("Sender PSID: " + sender_psid);
+      //let sender_psid = webhook_event.sender.id;
+      //console.log("Sender PSID: " + sender_psid);
     });
 
     // Return a "200 OK" response to all events
