@@ -2,10 +2,11 @@ const request = require("request");
 const express = require("express");
 const body_parser = require("body-parser");
 
+const port = process.env.PORT || 8080;
 const app = express().use(body_parser.json());
 
 // Sets server port and logs message on success
-app.listen(process.env.PORT || 1337, () => console.log(`webhook is listening on port: ${process.env.PORT}`));
+app.listen(port, () => console.log(`webhook is listening on port: ${port}`));
 
 // Accepts POST requests at /webhook endpoint
 app.post("/webhook", (req, res) => {
