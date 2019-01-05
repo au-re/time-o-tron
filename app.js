@@ -12,7 +12,7 @@ const app = express().use(bodyParser.json());
 app.listen(port, () => console.log(`webhook is listening on port: ${port}`));
 
 function capitalize(string) {
-  return string.split(" ").map((e) => e.charAt(0).toUpperCase() + e.slice(1)).join("");
+  return string.split(" ").map((e) => e.charAt(0).toUpperCase() + e.slice(1)).join(" ");
 }
 
 function getCityInfo(cityName) {
@@ -61,7 +61,7 @@ function handleMessage(sender_psid, received_message) {
 
       const currenTime = moment().tz(timezone).format("HH:mm");
       const currentDay = moment().tz(timezone).format("dddd");
-      const currentDate = moment().tz(timezone).format("do");
+      const currentDate = moment().tz(timezone).format("Do");
 
       response = {
         text: `Current time in ${capitalize(city)}, ${capitalize(country)} is ${currenTime}, ${currentDay} the ${currentDate}`,
