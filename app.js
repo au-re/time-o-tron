@@ -2,12 +2,10 @@ const request = require("request");
 const express = require("express");
 const body_parser = require("body-parser");
 
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-
 const app = express().use(body_parser.json());
 
 // Sets server port and logs message on success
-app.listen(process.env.PORT || 1337, () => console.log("webhook is listening"));
+app.listen(process.env.PORT || 1337, () => console.log(`webhook is listening on port: ${process.env.PORT}`));
 
 // Accepts POST requests at /webhook endpoint
 app.post("/webhook", (req, res) => {
@@ -28,8 +26,8 @@ app.post("/webhook", (req, res) => {
       console.log(webhook_event);
 
       // Get the sender PSID
-      let sender_psid = webhook_event.sender.id;
-      console.log("Sender PSID: " + sender_psid);
+      // let sender_psid = webhook_event.sender.id;
+      // console.log("Sender PSID: " + sender_psid);
     });
 
     // Return a "200 OK" response to all events
@@ -46,7 +44,7 @@ app.get("/webhook", (req, res) => {
   console.log("GET /webhook");
 
   /** UPDATE YOUR VERIFY TOKEN **/
-  const VERIFY_TOKEN = "<YOUR_VERIFY_TOKEN>";
+  const VERIFY_TOKEN = "random_cat";
 
   // Parse params from the webhook verification request
   let mode = req.query["hub.mode"];
