@@ -3,12 +3,20 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const moment = require("moment-timezone");
 
+const data = require("./cities_timezones");
+
 const port = process.env.PORT || 8080;
 const app = express().use(bodyParser.json());
 
 // Sets server port and logs message on success
 app.listen(port, () => console.log(`webhook is listening on port: ${port}`));
 
+function getCityTimezone(cityName) {
+  const cities = data.filter((entry) => entry.names.includes(cityName));
+  const res = cities[0] || {};
+  console.log("found CITY:", res);
+  return res.timezone;
+}
 
 // Sends response messages via the Send API
 async function callSendAPI(sender_psid, response) {
@@ -39,7 +47,10 @@ function handleMessage(sender_psid, received_message) {
 
   if (received_message.text) { // Check if the message contains text
     try {
-      const currenTime = moment().tz(received_message.text).format("YY-MM-DD hh:mm");
+      const timeZone = getCityTimezone(received_message.text);
+      if (!timeZone) throw new Error("no timezone found");
+
+      const currenTime = moment().tz(timeZone).format("YY-MM-DD hh:mm");
       response = {
         text: `Current time in "${received_message.text}" is "${currenTime}"`,
       };
