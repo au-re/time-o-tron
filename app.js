@@ -17,9 +17,13 @@ function capitalize(string) {
 
 function getCityInfo(cityName) {
   const cities = data.filter((entry) => entry.names.split(",").includes(cityName.toLowerCase()));
-  const res = cities[0] || {};
+  const cityInfo = cities[0] || {};
   console.log(cities.length, JSON.stringify(cities));
-  return res;
+  return {
+    city: cityName,
+    country: capitalize(cityInfo.country),
+    timezone: cityInfo.timezone,
+  };
 }
 
 // Sends response messages via the Send API
