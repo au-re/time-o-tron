@@ -11,11 +11,15 @@ const app = express().use(bodyParser.json());
 // Sets server port and logs message on success
 app.listen(port, () => console.log(`webhook is listening on port: ${port}`));
 
-function getCityTimezone(cityName) {
-  const cities = data.filter((entry) => entry.names.includes(cityName));
+function capitalize(string) {
+  return string.split(" ").map((e) => e.charAt(0).toUpperCase() + e.slice(1)).join("");
+}
+
+function getCityInfo(cityName) {
+  const cities = data.filter((entry) => entry.names.split(",").includes(cityName));
   const res = cities[0] || {};
-  console.log(cities.length, res);
-  return res.timezone;
+  console.log(cities.length, JSON.stringify(cities));
+  return res;
 }
 
 // Sends response messages via the Send API
@@ -47,15 +51,15 @@ function handleMessage(sender_psid, received_message) {
 
   if (received_message.text) { // Check if the message contains text
     try {
-      const timeZone = getCityTimezone(received_message.text);
-      if (!timeZone) throw new Error("no timezone found");
+      const { country, city, timezone } = getCityInfo(received_message.text.toLowerCase());
+      if (!timezone) throw new Error("no timezone found");
 
-      const currenTime = moment().tz(timeZone).format("HH:mm");
-      const currentDay = moment().tz(timeZone).format("dddd");
-      const currentDate = moment().tz(timeZone).format("do");
+      const currenTime = moment().tz(timezone).format("HH:mm");
+      const currentDay = moment().tz(timezone).format("dddd");
+      const currentDate = moment().tz(timezone).format("do");
 
       response = {
-        text: `Current time in ${received_message.text} is ${currenTime}, ${currentDay} the ${currentDate}`,
+        text: `Current time in ${capitalize(city)}, ${capitalize(country)} is ${currenTime}, ${currentDay} the ${currentDate}`,
       };
     } catch (error) {
       response = {
