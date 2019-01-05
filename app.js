@@ -35,10 +35,10 @@ async function callSendAPI(sender_psid, response) {
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
   let response;
-
+  const currenTime = moment();
   if (received_message.text) { // Check if the message contains text
     response = {
-      text: `You sent the message: "${received_message.text}". Now send me an image!`,
+      text: `You sent the message: "${received_message.text}" current time: "${currenTime.format("YY-MM-DD hh:mm")}"`,
     };
   }
 
