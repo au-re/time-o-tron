@@ -16,7 +16,7 @@ function capitalize(string) {
 }
 
 function getCityInfo(cityName) {
-  const cities = data.filter((entry) => entry.names.split(",").includes(cityName));
+  const cities = data.filter((entry) => entry.names.split(",").includes(cityName.toLowerCase()));
   const res = cities[0] || {};
   console.log(cities.length, JSON.stringify(cities));
   return res;
@@ -38,7 +38,7 @@ async function callSendAPI(sender_psid, response) {
       .send(request_body)
       .set("X-API-Key", "foobar")
       .set("accept", "json");
-    console.log(`Message sent: ${response} to: ${sender_psid}`);
+    console.log(`Message sent: ${response.text} to: ${sender_psid}`);
 
   } catch (error) {
     console.error(`Unable to send message: ${error}`);
@@ -51,7 +51,8 @@ function handleMessage(sender_psid, received_message) {
 
   if (received_message.text) { // Check if the message contains text
     try {
-      const { country, city, timezone } = getCityInfo(received_message.text.toLowerCase());
+      const { country, city, timezone } = getCityInfo(received_message.text);
+      console.log(country, city, timezone);
       if (!timezone) throw new Error("no timezone found");
 
       const currenTime = moment().tz(timezone).format("HH:mm");
