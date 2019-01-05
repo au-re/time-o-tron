@@ -14,7 +14,7 @@ app.listen(port, () => console.log(`webhook is listening on port: ${port}`));
 function getCityTimezone(cityName) {
   const cities = data.filter((entry) => entry.names.includes(cityName));
   const res = cities[0] || {};
-  console.log("found CITY:", res);
+  console.log(cities);
   return res.timezone;
 }
 
@@ -50,9 +50,12 @@ function handleMessage(sender_psid, received_message) {
       const timeZone = getCityTimezone(received_message.text);
       if (!timeZone) throw new Error("no timezone found");
 
-      const currenTime = moment().tz(timeZone).format("dd do HH:mm");
+      const currenTime = moment().tz(timeZone).format("HH:mm");
+      const currentDay = moment().tz(timeZone).format("dddd");
+      const currentDate = moment().tz(timeZone).format("do");
+
       response = {
-        text: `Current time in "${received_message.text}" is "${currenTime}"`,
+        text: `Current time in ${received_message.text} is ${currenTime}, ${currentDay} the ${currentDate}`,
       };
     } catch (error) {
       response = {
