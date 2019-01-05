@@ -9,16 +9,6 @@ const app = express().use(bodyParser.json());
 app.listen(port, () => console.log(`webhook is listening on port: ${port}`));
 
 
-// Handles messages events
-function handleMessage(sender_psid, received_message) {
-
-}
-
-// Handles messaging_postbacks events
-function handlePostback(sender_psid, received_postback) {
-
-}
-
 // Sends response messages via the Send API
 async function callSendAPI(sender_psid, response) {
   const request_body = {
@@ -40,6 +30,25 @@ async function callSendAPI(sender_psid, response) {
   } catch (error) {
     console.error(`Unable to send message: ${error}`);
   }
+}
+
+// Handles messages events
+function handleMessage(sender_psid, received_message) {
+  let response;
+
+  if (received_message.text) { // Check if the message contains text
+    response = {
+      text: `You sent the message: "${received_message.text}". Now send me an image!`,
+    };
+  }
+
+  // Sends the response message
+  callSendAPI(sender_psid, response);
+}
+
+// Handles messaging_postbacks events
+function handlePostback(sender_psid, received_postback) {
+
 }
 
 // Accepts POST requests at /webhook endpoint
