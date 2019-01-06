@@ -41,14 +41,14 @@ async function handleMessage(sender_psid, received_message) {
       const cityName = _.get(intent, "entities[0].entity");
 
       if (intentName == "time at place") {
-        const { country, city, timezone } = getCityInfo(cityName);
-        console.log(country, city, timezone);
         if (!cityName) {
           response = {
             text: `I do not understand what city you are interested in`,
           };
         }
         else {
+          const { country, city, timezone } = getCityInfo(cityName);
+          console.log(country, city, timezone);
           if (!timezone) throw new Error("no timezone found");
 
           const currenTime = moment().tz(timezone).format("HH:mm");
