@@ -34,6 +34,8 @@ function handleMessage(sender_psid, received_message) {
 
   if (received_message.text) { // Check if the message contains text
     try {
+      const intent = getLuisIntent(received_message.text);
+      console.log("intent: ", JSON.stringify(intent));
       const { country, city, timezone } = getCityInfo(received_message.text);
       console.log(country, city, timezone);
       if (!timezone) throw new Error("no timezone found");
