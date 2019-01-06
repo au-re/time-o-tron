@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const moment = require("moment-timezone");
+const _ = require('lodash');
 
 const { callSendAPI, getLuisIntent } = require("./helpers");
 const data = require("../data/cities_timezones");
@@ -36,20 +37,28 @@ async function handleMessage(sender_psid, received_message) {
     try {
       const intent = await getLuisIntent(received_message.text);
       console.log("intent: ", JSON.stringify(intent));
-      const intentName = intent.topScoringIntent.intent;
-      const cityName = intent.entities[0].entity;
+      const intentName = _.get(intent, "topScoringIntent.intent");
+      const cityName = _.get(intent, "entities[0].entity");
+
       if (intentName == "time at place") {
         const { country, city, timezone } = getCityInfo(cityName);
         console.log(country, city, timezone);
-        if (!timezone) throw new Error("no timezone found");
+        if (!cityName) {
+          response = {
+            text: `I not understand what city you are interested in`,
+          };
+        }
+        else {
+          if (!timezone) throw new Error("no timezone found");
 
-        const currenTime = moment().tz(timezone).format("HH:mm");
-        const currentDay = moment().tz(timezone).format("dddd");
-        const currentDate = moment().tz(timezone).format("Do");
+          const currenTime = moment().tz(timezone).format("HH:mm");
+          const currentDay = moment().tz(timezone).format("dddd");
+          const currentDate = moment().tz(timezone).format("Do");
 
-        response = {
-          text: `Current time in ${capitalize(city)}, ${capitalize(country)} is ${currenTime}, ${currentDay} the ${currentDate}`,
-        };
+          response = {
+            text: `Current time in ${capitalize(city)}, ${capitalize(country)} is ${currenTime}, ${currentDay} the ${currentDate}`,
+          };
+        }
       }
       else {
         response = {
@@ -58,7 +67,7 @@ async function handleMessage(sender_psid, received_message) {
       }
     } catch (error) {
       response = {
-        text: `Cannot find time for "${received_message.text}"`,
+        text: `Something went wrong.`,
       };
     }
   }
