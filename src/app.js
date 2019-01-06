@@ -36,17 +36,26 @@ async function handleMessage(sender_psid, received_message) {
     try {
       const intent = await getLuisIntent(received_message.text);
       console.log("intent: ", JSON.stringify(intent));
-      const { country, city, timezone } = getCityInfo(received_message.text);
-      console.log(country, city, timezone);
-      if (!timezone) throw new Error("no timezone found");
+      const intentName = intent.topScoringIntent.intent;
+      const cityName = intent.entities[0].entity;
+      if (intentName == "time at place") {
+        const { country, city, timezone } = getCityInfo(cityName);
+        console.log(country, city, timezone);
+        if (!timezone) throw new Error("no timezone found");
 
-      const currenTime = moment().tz(timezone).format("HH:mm");
-      const currentDay = moment().tz(timezone).format("dddd");
-      const currentDate = moment().tz(timezone).format("Do");
+        const currenTime = moment().tz(timezone).format("HH:mm");
+        const currentDay = moment().tz(timezone).format("dddd");
+        const currentDate = moment().tz(timezone).format("Do");
 
-      response = {
-        text: `Current time in ${capitalize(city)}, ${capitalize(country)} is ${currenTime}, ${currentDay} the ${currentDate}`,
-      };
+        response = {
+          text: `Current time in ${capitalize(city)}, ${capitalize(country)} is ${currenTime}, ${currentDay} the ${currentDate}`,
+        };
+      }
+      else {
+        response = {
+          text: `This is not supported yet in our marvelous system`,
+        };
+      }
     } catch (error) {
       response = {
         text: `Cannot find time for "${received_message.text}"`,
