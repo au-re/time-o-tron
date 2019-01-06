@@ -9,7 +9,7 @@ const endpoint = `https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/${ap
 // utterance = user's text
 //
 async function getLuisIntent(utterance) {
-
+  console.log("utterance: ", utterance);
   try {
     const data = await request
       .get(endpoint)
@@ -18,7 +18,7 @@ async function getLuisIntent(utterance) {
         q: utterance,
         "subscription-key": endpointKey,
       });
-
+    console.log("data: ", JSON.stringify(data));
     return data.body;
 
   } catch (error) {
