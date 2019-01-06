@@ -10,6 +10,7 @@
     ],
     "no-console": "off",
     "no-unused-vars": "warn",
+    "import/prefer-default-export": "off",
     "camelcase": "off",
     "class-methods-use-this": "off",
     "consistent-return": "off",

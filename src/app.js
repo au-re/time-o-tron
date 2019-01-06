@@ -1,9 +1,11 @@
-const request = require("superagent");
+require("dotenv").config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const moment = require("moment-timezone");
 
-const data = require("./cities_timezones");
+const { callSendAPI, getLuisIntent } = require("./helpers");
+const data = require("../data/cities_timezones");
 
 const port = process.env.PORT || 8080;
 const app = express().use(bodyParser.json());
@@ -24,29 +26,6 @@ function getCityInfo(cityName) {
     country: capitalize(cityInfo.country),
     timezone: cityInfo.timezone,
   };
-}
-
-// Sends response messages via the Send API
-async function callSendAPI(sender_psid, response) {
-  const request_body = {
-    recipient: {
-      id: sender_psid,
-    },
-    message: response,
-  };
-
-  try {
-    await request
-      .post("https://graph.facebook.com/v2.6/me/messages")
-      .query({ access_token: process.env.PAGE_ACCESS_TOKEN })
-      .send(request_body)
-      .set("X-API-Key", "foobar")
-      .set("accept", "json");
-    console.log(`Message sent: ${response.text} to: ${sender_psid}`);
-
-  } catch (error) {
-    console.error(`Unable to send message: ${error}`);
-  }
 }
 
 // Handles messages events
