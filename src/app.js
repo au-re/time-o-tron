@@ -45,7 +45,7 @@ async function handleMessage(sender_psid, received_message) {
         console.log(country, city, timezone);
         if (!cityName) {
           response = {
-            text: `I not understand what city you are interested in`,
+            text: `I do not understand what city you are interested in`,
           };
         }
         else {
