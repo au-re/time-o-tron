@@ -1,0 +1,15 @@
+{
+  "name": "chat-bot-test",
+  "services": [
+    {
+      "type": "endpoint",
+      "appId": "",
+      "appPassword": "",
+      "endpoint": "http://localhost:3939/api/messages",
+      "id": "c5040270-26f8-11e9-8568-7df33bca3fed",
+      "name": "development"
+    }
+  ],
+  "padlock": "",
+  "version": "2.0"
+}

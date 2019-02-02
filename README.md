@@ -4,13 +4,18 @@ What time is it in ... ? Ask Time-o-Tron!
 
 A simple chatbot demo using Microsoft's Bot Framework
 
-Test commands
----
+## Getting started
+
+Add an `.env` file to the root of the project, e.g.:
 
 ```
-curl -X GET "localhost:1337/webhook?hub.verify_token=random_cat&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
+PAGE_ACCESS_TOKEN=XXX
+LUIS_APP_ID=XXX
+LUIS_ENDPOINT_KEY=XXX
+PORT=XXX
+BOT_NAME=XXX
 ```
 
-```
-curl -H "Content-Type: application/json" -X POST "localhost:1337/webhook" -d '{"object": "page", "entry": [{"messaging": [{"message": "TEST_MESSAGE"}]}]}'
-```
+Launch the bot with `npm run watch`;
+
+You can now test the bot by connecting to the [bot framework emulator](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0)

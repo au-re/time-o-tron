@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "tslint:recommended"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**/*.ts"
+    ]
+  },
+  "rules": {
+    "jsx-boolean-value": false,
+    "jsx-no-lambda": false,
+    "jsx-no-multiline-js": false,
+    "no-shadowed-variable": false,
+    "no-empty": false,
+    "member-ordering": false,
+    "member-access": false,
+    "curly": false,
+    "import-name": false,
+    "ter-arrow-parens": false,
+    "variable-name": false,
+    "object-shorthand-properties-first": false,
+    "prefer-array-literal": false,
+    "no-console": false,
+    "quotemark": [
+      true,
+      "double"
+    ]
+  }
+}
