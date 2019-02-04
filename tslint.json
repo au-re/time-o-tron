@@ -2,15 +2,7 @@
   "extends": [
     "tslint:recommended"
   ],
-  "linterOptions": {
-    "exclude": [
-      "node_modules/**/*.ts"
-    ]
-  },
   "rules": {
-    "jsx-boolean-value": false,
-    "jsx-no-lambda": false,
-    "jsx-no-multiline-js": false,
     "no-shadowed-variable": false,
     "no-empty": false,
     "member-ordering": false,

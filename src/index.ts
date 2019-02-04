@@ -1,7 +1,8 @@
 import * as bodyParser from "body-parser";
 import { BotFrameworkAdapter, ConversationState, MemoryStorage } from "botbuilder";
 import * as dotenv from "dotenv";
-import * as express from "express";
+import express from "express";
+import * as packageJson from "../package.json";
 
 import { MyBot } from "./bot";
 
@@ -20,10 +21,11 @@ adapter.onTurnError = async (context, error) => {
   await conversationState.delete(context);
 };
 
-// server
 const port = process.env.PORT || 3939;
 const app = express().use(bodyParser.json());
+
 app.set("name", process.env.BOT_NAME);
+app.set("version", packageJson.version);
 
 app.post("/api/messages", (req, res) => {
   adapter.processActivity(req, res, async (context) => {
@@ -31,4 +33,11 @@ app.post("/api/messages", (req, res) => {
   });
 });
 
-app.listen(port, () => console.log(`\n${app.get("name")} listening on ${port}`));
+app.get("/about", (req, res) => {
+  return res.status(200).send({
+    name: req.app.get("name"),
+    version: req.app.get("version"),
+  });
+});
+
+app.listen(port, () => console.log(`\n${app.get("name")} listening on http://localhost:${port}`));
