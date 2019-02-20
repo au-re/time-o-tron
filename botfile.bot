@@ -1,13 +1,21 @@
 {
-  "name": "chat-bot-test",
+  "name": "time-o-tron",
   "services": [
+    {
+      "type": "endpoint",
+      "appId": "",
+      "appPassword": "",
+      "endpoint": "http://localhost:3939/api/messages",
+      "id": "1",
+      "name": "development"
+    },
     {
       "type": "endpoint",
       "appId": "22f7cbce-c971-4007-a9c0-fd257742b154",
       "appPassword": "zrmasoCGWBCZ480*~fG76$(",
-      "endpoint": "http://localhost:3939/api/messages",
-      "id": "c5040270-26f8-11e9-8568-7df33bca3fed",
-      "name": "development"
+      "endpoint": "http://localhost:80/api/messages",
+      "id": "2",
+      "name": "production"
     }
   ],
   "padlock": "",
