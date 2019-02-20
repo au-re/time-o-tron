@@ -9,6 +9,8 @@ A simple chatbot demo using Microsoft's Bot Framework
 Add an `.env` file to the root of the project, e.g.:
 
 ```
+MICROSOFT_APP_ID=XXX
+MICROSOFT_APP_PASSWORD=XXX
 PAGE_ACCESS_TOKEN=XXX
 LUIS_APP_ID=XXX
 LUIS_ENDPOINT_KEY=XXX
