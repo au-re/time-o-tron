@@ -8,9 +8,10 @@
         "clean": "rm -rf node_modules lib && npm i",
         "build": "tsc --build",
         "lint": "tslint -c tslint.json 'src/**/*.ts'",
-        "start": "npm run build && node -r dotenv/config ./lib/src/index.js",
+        "start": "node -r dotenv/config ./lib/src/index.js",
+        "heroku-postbuild": "npm run build",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "watch": "nodemon --watch ./src -e ts --exec \"npm run start\""
+        "watch": "nodemon --watch ./src -e ts --exec \"npm run build && npm run start\""
     },
     "repository": {
         "type": "git",
