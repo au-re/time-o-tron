@@ -3,6 +3,8 @@ import request from "superagent";
 
 import * as data from "./data/cities_timezones.json";
 
+console.log("MICROSOFT_APP_ID", process.env.MICROSOFT_APP_ID);
+
 const appId = process.env.LUIS_APP_ID;
 const endpointKey = process.env.LUIS_ENDPOINT_KEY;
 const endpoint = `https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/${appId}`;
