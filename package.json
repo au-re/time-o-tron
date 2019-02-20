@@ -1,6 +1,6 @@
 {
     "name": "time-o-tron",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "What time is it in ... ? Ask Time-o-Tron!",
     "license": "MIT",
     "main": "./lib/index.js",
