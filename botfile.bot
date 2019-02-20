@@ -13,7 +13,7 @@
       "type": "endpoint",
       "appId": "22f7cbce-c971-4007-a9c0-fd257742b154",
       "appPassword": "zrmasoCGWBCZ480*~fG76$(",
-      "endpoint": "http://localhost:80/api/messages",
+      "endpoint": "https://time-o-tron.herokuapp.com/api/messages",
       "id": "2",
       "name": "production"
     }
