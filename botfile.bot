@@ -3,8 +3,8 @@
   "services": [
     {
       "type": "endpoint",
-      "appId": "",
-      "appPassword": "",
+      "appId": "22f7cbce-c971-4007-a9c0-fd257742b154",
+      "appPassword": "zrmasoCGWBCZ480*~fG76$(",
       "endpoint": "http://localhost:3939/api/messages",
       "id": "c5040270-26f8-11e9-8568-7df33bca3fed",
       "name": "development"
