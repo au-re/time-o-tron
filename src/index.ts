@@ -1,12 +1,9 @@
 import * as bodyParser from "body-parser";
 import { BotFrameworkAdapter, ConversationState, MemoryStorage } from "botbuilder";
-import * as dotenv from "dotenv";
 import express from "express";
 import * as packageJson from "../package.json";
 
 import { MyBot } from "./bot";
-
-dotenv.config();
 
 const memoryStorage = new MemoryStorage();
 const conversationState = new ConversationState(memoryStorage);
